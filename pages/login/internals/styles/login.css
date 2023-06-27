@@ -1,0 +1,60 @@
+.form-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 40rem;
+  margin: auto;
+}
+
+.login-input {
+  margin-bottom: 1rem;
+}
+
+i {
+  font-size: 3rem;
+  color: white;
+  background-color: #212529;
+  border-radius: 3px;
+  padding: 7px 10px;
+  margin-bottom: 1rem;
+}
+
+.create-account {
+  margin-top: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.text-body-secondary {
+  text-align: center;
+}
+
+.login-page {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+.center{
+  display: block;
+  text-align: center;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+@media (max-width: 769px) {
+  .form-container{
+    text-align: center;
+  }
+}
