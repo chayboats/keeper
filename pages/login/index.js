@@ -42,7 +42,11 @@ export default function Login() {
 
   function authenticate(e) {
     e.preventDefault();
-    console.log(users.find)
+    users.forEach((user) => {
+      if(login.email == user.email) {
+        console.log(true) 
+      }
+    })
   }
 
   return (
