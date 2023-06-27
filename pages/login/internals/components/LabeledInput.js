@@ -1,5 +1,15 @@
 export default function LabeledInput(props) {
-  const { divClass, id, type, inputClass, placeholder, labelClass, labelFor, labelText } = props;
+  const {
+    divClass,
+    id,
+    type,
+    inputClass,
+    placeholder,
+    labelClass,
+    labelFor,
+    labelText,
+    onChange
+  } = props;
   return (
     <div className={divClass}>
       <input
@@ -7,11 +17,9 @@ export default function LabeledInput(props) {
         className={inputClass}
         id={id}
         placeholder={placeholder}
+        onChange={onChange}
       />
-      <label
-        className={labelClass}
-        for={labelFor}
-      >
+      <label className={labelClass} htmlFor={labelFor}>
         {labelText}
       </label>
     </div>
