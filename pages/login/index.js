@@ -39,12 +39,18 @@ export default function Login() {
       });
     }
   }
+  // setLogin((prevValue) => {
+  //    [id]: value, 
+  //})
 
   function authenticate(e) {
     e.preventDefault();
-    users.forEach((user) => {
+    users.forEach((user, index) => {
       if(login.email == user.email) {
-        console.log(true) 
+        if(login.password == user.password) {
+          return console.log("Login Successful")
+        } 
+        console.log("incorrect password")
       }
     })
   }
