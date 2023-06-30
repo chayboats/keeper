@@ -72,7 +72,7 @@ export default function Login() {
               id="email"
               placeholder="name@example.com"
               onChange={updateEmail}
-              required={true}
+              required
               value={email}
             />
             <label htmlFor="floatingInput">Email Address</label>
@@ -85,7 +85,7 @@ export default function Login() {
               id="password"
               placeholder="Password"
               onChange={updatePassword}
-              required={true}
+              required
               value={password}
             />
             <label>Password</label>
@@ -96,9 +96,13 @@ export default function Login() {
               type="form-check text-start my-3"
               className="form-check-input"
               id="checkbox"
-              htmlFor="flexCheckDefault"
             />
-            <label className="form-check-label">Remember me</label>
+            <label
+              htmlFor="checkbox"
+              className="form-check-label"
+            >
+              Remember me
+            </label>
           </div>
 
           <button
