@@ -1,21 +1,18 @@
-import styles from "./internals/styles/login.css";
-import Link from "next/link";
-import { inputInfo } from "./internals/data/inputInfo";
-import LabeledInput from "./internals/components/LabeledInput";
-import { useState, useEffect } from "react";
+import './internals/styles/login.css';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Login() {
+  const router = useRouter();
+
   const [users, setUsers] = useState([]);
-  const [login, setLogin] = useState([
-    {
-      email: "",
-      password: "",
-    },
-  ]);
-  const [user, setUser] = useState("")
+  const [email, setEmail] = useState('atuny0@sohu.com');
+  const [password, setPassword] = useState('9uQFF1Lh');
+
+  const [signInError, setSignInError] = useState(false);
 
   async function getUsers() {
-    const data = await fetch("https://dummyjson.com/users");
+    const data = await fetch('https://dummyjson.com/users');
     const jsonData = await data.json();
     setUsers(jsonData.users);
   }
@@ -28,66 +25,102 @@ export default function Login() {
     return <h1>Loading</h1>;
   }
 
-  function updateLogin(e) {
-    const { id, value } = e.target;
-    if (id != "checkbox") {
-      setLogin((prevValue) => {
-        if (id === "email") {
-          return { email: value, password: prevValue.password };
-        }
-        return { email: prevValue.email, password: value };
-      });
-    }
+  function updateEmail(e) {
+    setEmail(e.target.value);
+  }
+
+  function updatePassword(e) {
+    setPassword(e.target.value);
   }
 
   function authenticate(e) {
     e.preventDefault();
-    users.forEach((user) => {
-      if(login.email == user.email) {
-        console.log(true) 
-      }
-    })
+    let successfulLogin = users.find((user) => {
+      return email == user.email && password == user.password;
+    });
+
+    if (!successfulLogin) {
+      setSignInError(true);
+      return;
+    }
+
+    router.push('/home');
   }
 
   return (
     <div className="login-page">
       <div className="form-container">
-        <form className="container">
+        <form
+          onSubmit={authenticate}
+          className="container"
+        >
           <i className="fa-solid fa-list-check"></i>
-
           <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-          {inputInfo.map((input) => (
-            <LabeledInput
-              id={input.id}
-              key={input.id}
-              divClass={input.divClass}
-              type={input.type}
-              inputClass={input.inputClass}
-              placeholder={input.placeholder}
-              labelClass={input.labelClass}
-              labelFor={input.labelFor}
-              labelText={input.labelText}
-              onChange={updateLogin}
-            />
-          ))}
+          {signInError && (
+            <div
+              className="alert alert-danger"
+              role="alert"
+            >
+              Incorrect email or password
+            </div>
+          )}
 
-          {/* <Link href="/home">
-            
-          </Link> */}
+          <div className="form-floating">
+            <input
+              type="email"
+              className="form-control login-input"
+              id="email"
+              placeholder="name@example.com"
+              onChange={updateEmail}
+              required
+              value={email}
+            />
+            <label htmlFor="floatingInput">Email Address</label>
+          </div>
+
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control login-input"
+              id="password"
+              placeholder="Password"
+              onChange={updatePassword}
+              required
+              value={password}
+            />
+            <label>Password</label>
+          </div>
+
+          <div className="form-check text-start my-3">
+            <input
+              type="form-check text-start my-3"
+              className="form-check-input"
+              id="checkbox"
+            />
+            <label
+              htmlFor="checkbox"
+              className="form-check-label"
+            >
+              Remember me
+            </label>
+          </div>
 
           <button
-              onClick={authenticate}
-              className="btn btn-dark w-100 py-2"
-              type="submit"
-            >
-              Sign in
-            </button>
+            onSubmit={authenticate}
+            className="btn btn-dark w-100 py-2"
+            type="submit"
+          >
+            Sign in
+          </button>
 
-          <a className="center mt-3" href="">
+          <a
+            className="center"
+            href=""
+          >
             Create an account
           </a>
 
-          <p className="center mt-3 text-body-secondary">©2023</p>
+          <p className="center text-dark">©{new Date().getFullYear()}</p>
         </form>
       </div>
     </div>
