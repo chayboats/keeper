@@ -8,8 +8,11 @@ export default function LabeledInput(props) {
     labelClass,
     labelFor,
     labelText,
-    onChange
+    onChange,
+    required,
+    value,
   } = props;
+
   return (
     <div className={divClass}>
       <input
@@ -18,6 +21,8 @@ export default function LabeledInput(props) {
         id={id}
         placeholder={placeholder}
         onChange={onChange}
+        required={required}
+        value={value}
       />
       <label className={labelClass} htmlFor={labelFor}>
         {labelText}

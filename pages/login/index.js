@@ -1,8 +1,8 @@
-import styles from "./internals/styles/login.css";
-import Link from "next/link";
+import styles from "./styles/login.css";
 import { inputInfo } from "./internals/data/inputInfo";
 import LabeledInput from "./internals/components/LabeledInput";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const [users, setUsers] = useState([]);
@@ -12,7 +12,8 @@ export default function Login() {
       password: "",
     },
   ]);
-  const [user, setUser] = useState("")
+  const [signInError, setSignInError] = useState(false);
+  const router = useRouter();
 
   async function getUsers() {
     const data = await fetch("https://dummyjson.com/users");
@@ -30,70 +31,60 @@ export default function Login() {
 
   function updateLogin(e) {
     const { id, value } = e.target;
-    if (id != "checkbox") {
+    if (id !== "checkbox") {
       setLogin((prevValue) => {
         if (id === "email") {
           return { email: value, password: prevValue.password };
         }
+
         return { email: prevValue.email, password: value };
       });
     }
   }
-  // setLogin((prevValue) => {
-  //    [id]: value, 
-  //})
 
   function authenticate(e) {
     e.preventDefault();
-    users.forEach((user, index) => {
-      if(login.email == user.email) {
-        if(login.password == user.password) {
-          return console.log("Login Successful")
-        } 
-        console.log("incorrect password")
-      }
-    })
+    let successfulLogin = users.find((user) => {
+      return login.email == user.email && login.password == user.password;
+    });
+
+    if (!successfulLogin) {
+      setSignInError(true);
+      return;
+    }
+
+    router.push("/home");
   }
 
   return (
     <div className="login-page">
       <div className="form-container">
-        <form className="container">
+        <form onSubmit={authenticate} type="submit" className="container">
           <i className="fa-solid fa-list-check"></i>
-
           <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+          {signInError && (
+            <div className="alert alert-danger" role="alert">
+              Incorrect email or password
+            </div>
+          )}
+
           {inputInfo.map((input) => (
-            <LabeledInput
-              id={input.id}
-              key={input.id}
-              divClass={input.divClass}
-              type={input.type}
-              inputClass={input.inputClass}
-              placeholder={input.placeholder}
-              labelClass={input.labelClass}
-              labelFor={input.labelFor}
-              labelText={input.labelText}
-              onChange={updateLogin}
-            />
+            <LabeledInput key={input.id} {...input} onChange={updateLogin} />
           ))}
 
-          {/* <Link href="/home">
-            
-          </Link> */}
-
           <button
-              onClick={authenticate}
-              className="btn btn-dark w-100 py-2"
-              type="submit"
-            >
-              Sign in
-            </button>
+            onSubmit={authenticate}
+            className="btn btn-dark w-100 py-2"
+            type="submit"
+          >
+            Sign in
+          </button>
 
-          <a className="center mt-3" href="">
+          <a className="center" href="">
             Create an account
           </a>
 
-          <p className="center mt-3 text-body-secondary">©2023</p>
+          <p className="center text-dark">©2023</p>
         </form>
       </div>
     </div>

@@ -1,8 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import styles from './start/internals/styles/start.css';
-import Header from '@/pages/start/internals/components/Header/Header';
-import Main from '@/pages/start/internals/components/Main';
+import styles from "./start/internals/styles/start.css";
+import Header from "@/pages/start/internals/components/Header/Header";
+import Main from "@/pages/start/internals/components/Main";
 
 export default function Start() {
   return (
