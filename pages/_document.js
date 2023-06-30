@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
@@ -12,8 +12,8 @@ export default function Document() {
         />
         <script
           src="https://kit.fontawesome.com/a613df3a16.js"
-          crossorigin="anonymous"
-        ></script>{" "}
+          crossOrigin="anonymous"
+        />
       </Head>
 
       <body>
