@@ -1,6 +1,6 @@
 import Dropdown from "./Dropdown";
 export default function Header(props) {
-  const { clickProfileImage, dropdownClass, createNote } = props;
+  const { profileImgSrc, clickProfileImage, dropdownClass, createNote } = props;
 
   return (
     <div>
@@ -8,7 +8,7 @@ export default function Header(props) {
         <h1>Keeper</h1>
         <div className="profile">
           <img
-            src="https://github.com/mdo.png"
+            src={profileImgSrc}
             alt="mdo"
             width="32"
             height="32"
