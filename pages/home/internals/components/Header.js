@@ -1,6 +1,6 @@
-import Dropdown from './Dropdown';
+import Dropdown from "./Dropdown";
 export default function Header(props) {
-  const { onClick, dropdownClass } = props;
+  const { clickProfileImage, dropdownClass, createNote } = props;
 
   return (
     <div>
@@ -13,11 +13,11 @@ export default function Header(props) {
             width="32"
             height="32"
             className="rounded-circle"
-            onClick={onClick}
+            onClick={clickProfileImage}
           />
         </div>
       </header>
-      <Dropdown dropdownClass={dropdownClass} />
+      <Dropdown createNote={createNote} dropdownClass={dropdownClass} />
     </div>
   );
 }

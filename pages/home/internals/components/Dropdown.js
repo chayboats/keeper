@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 export default function Dropdown(props) {
-  const { dropdownClass } = props;
+  const { dropdownClass, createNote } = props;
   return (
     <ul className={dropdownClass}>
-      <li id="create-note">+ Create Note</li>
+      <li onClick={createNote} id="create-note">+ Create Note</li>
       <li id="line">
         <hr />
       </li>

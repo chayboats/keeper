@@ -21,7 +21,7 @@
   background-color: white;
 }
 
-.none {
+.hide {
   display: none;
 }
 
@@ -67,6 +67,7 @@ hr {
   border: none;
   background-color: transparent;
   font-size: 1.5rem;
+  width: 100%;
 }
 
 .input-title, .input-text {

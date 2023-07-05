@@ -1,7 +1,7 @@
-import './internals/styles/home.css';
-import Header from './internals/components/Header';
-import NoteForm from './internals/components/NoteForm';
-import { useState } from 'react';
+import "./internals/styles/home.css";
+import Header from "./internals/components/Header";
+import NoteForm from "./internals/components/NoteForm";
+import { useState } from "react";
 
 export default function Home() {
   const [hideDropdown, setHideDropdown] = useState(true);
@@ -18,10 +18,19 @@ export default function Home() {
   return (
     <div class="home">
       <Header
-        onClick={toggleDropdownClass}
-        dropdownClass={hideDropdown ? 'none' : 'show'}
+        clickProfileImage={toggleDropdownClass}
+        dropdownClass={hideDropdown ? "hide" : "show"}
+        createNote={() => {
+          expandForm();
+          toggleDropdownClass();
+        }}
       />
-      <NoteForm onClick={expandForm} inputTitleClass={showForm ? 'input-text' : 'none'} buttonTitleClass={showForm ? 'add-note': 'none'} rows={showForm ?  3 : 1}/>
+      <NoteForm
+        clickTextArea={expandForm}
+        inputTitleClass={showForm ? "input-text" : "hide"}
+        buttonTitleClass={showForm ? "add-note" : "hide"}
+        rows={showForm ? 3 : 1}
+      />
     </div>
   );
 }
