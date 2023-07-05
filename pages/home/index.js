@@ -6,12 +6,7 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [hideDropdown, setHideDropdown] = useState(true);
   const [showForm, setShowForm] = useState(false);
-
   const [profileImage, setProfileImage] = useState(undefined);
-
-  function randomIndex(array) {
-    return array[Math.floor(Math.random() * array.length)];
-  }
 
   async function getImage() {
     try {
@@ -20,19 +15,15 @@ export default function Home() {
       );
       const jsonImageData = await imageData.json();
       const jsonPhotos = jsonImageData.photos;
-      const randomPhoto = randomIndex(jsonPhotos);
+      const randomPhoto = randomElementFromArray(jsonPhotos);
       setProfileImage(randomPhoto.url);
     } catch (error) {
-      console.log("Error fetching image", error);
+      alert(error);
     }
   }
 
-  useEffect(() => {
-    getImage();
-  }, []);
-
-  if (profileImage === undefined) {
-    return <h1>Loading...</h1>;
+  function randomElementFromArray(array) {
+    return array[Math.floor(Math.random() * array.length)];
   }
 
   function toggleDropdownClass() {
@@ -43,16 +34,26 @@ export default function Home() {
     setShowForm(true);
   }
 
+  function createNote() {
+    toggleDropdownClass();
+    expandForm();
+  }
+
+  useEffect(() => {
+    getImage();
+  }, []);
+
+  if (profileImage === undefined) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <div className="home">
       <Header
         profileImgSrc={profileImage}
         clickProfileImage={toggleDropdownClass}
         dropdownClass={hideDropdown ? "hide" : "show"}
-        createNote={() => {
-          expandForm();
-          toggleDropdownClass();
-        }}
+        createNote={createNote}
       />
       <NoteForm
         clickTextArea={expandForm}
