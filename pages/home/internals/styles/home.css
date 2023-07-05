@@ -56,7 +56,7 @@ hr {
 .note-form {
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  width: 15rem;
   border: 1px solid rgba(161, 161, 161, 0.395);
   border-radius: 5px;
   padding: 5px;
@@ -83,15 +83,34 @@ hr {
   color: white;
 }
 
+.notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 2rem;
+  margin: auto;
+}
+
+.note {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 10px;  
+}
+
 @media (max-width: 768px) {
   header, .profile {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+  .notes {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 15rem;
+  }
   header, h1 {
     margin-bottom: 1rem;
   }
+
 }
 @keyframes gradient {
 	0% {
