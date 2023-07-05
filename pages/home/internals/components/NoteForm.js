@@ -9,7 +9,7 @@ export default function NoteForm(props) {
           rows={rows}
           className="input-text"
           placeholder="Take a note"
-        ></textarea>
+        />
         <button className={buttonTitleClass} type="submit">
           Add
         </button>
