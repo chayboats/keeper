@@ -2,6 +2,7 @@ import "./internals/styles/home.css";
 import Header from "./internals/components/Header";
 import NoteForm from "./internals/components/NoteForm";
 import Note from "./internals/components/Note";
+import DeleteAlert from "./internals/components/DeleteAlert";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -73,7 +74,7 @@ export default function Home() {
       <Header
         profileImgSrc={profileImage}
         clickProfileImage={toggleDropdownClass}
-        dropdownClass={hideDropdown ? "hide" : "show"}
+        dropdownClass={hideDropdown ? "hide" : "header-dropdown"}
         createNote={createNote}
       />
       <NoteForm
@@ -95,6 +96,11 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <div className="hide">
+        <DeleteAlert />
+      </div>
     </div>
   );
 }
+
+//  home-alert

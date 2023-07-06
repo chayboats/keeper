@@ -19,6 +19,7 @@ export default function NoteForm(props) {
           value={titleValue}
           className={inputTitleClass}
           placeholder="Title"
+          maxLength={15}
         />
         <textarea
           onChange={contentChange}
@@ -28,6 +29,7 @@ export default function NoteForm(props) {
           className="input-text"
           placeholder="Take a note"
           required={true}
+          maxLength={95}
         />
         <button className={buttonTitleClass} onClick={clickAdd} type="submit">
           Add
