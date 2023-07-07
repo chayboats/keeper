@@ -96,7 +96,6 @@ hr {
   border: 1px solid rgba(161, 161, 161, 0.395);
   border-radius: 10px;
   padding: 10px;
-  
 }
 
 .note:hover {
@@ -110,10 +109,10 @@ hr {
 .note-title {
   font-weight: 300;
 }
+
 .note-content, .note{
   overflow: hidden;
 }
-
 
 .home-alert {
   backdrop-filter: blur(10px) ;
@@ -130,13 +129,14 @@ hr {
   align-items: center;
   color: white;
 }
+
 .delete-alert {
   background-color: rgb(31, 30, 30);
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 2px 2px 5px 3px black;
-
 }
+
 .home-alert button {
   background-color: rgb(31, 30, 30);
   color: rgb(106, 106, 229);
@@ -147,6 +147,7 @@ hr {
 .cancel-button:hover {
   color: white;
 }
+
 .delete-button:hover {
   color: rgb(242, 88, 88);
 }
@@ -164,6 +165,7 @@ hr {
 .note .top i:hover {
   color:rgb(102, 102, 225)
 }
+
 @media (max-width: 768px) {
   header, .profile {
     display: flex;
@@ -174,12 +176,11 @@ hr {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-
-
   header, h1 {
     margin-bottom: 1rem;
   }
 }
+
 @media (max-width: 426px) {
   .notes {
     display: grid;
@@ -189,8 +190,6 @@ hr {
   .note {
     height: 10rem;
   }
-
-
 }
 
 @keyframes gradient {

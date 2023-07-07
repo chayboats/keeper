@@ -2,7 +2,7 @@ export default function Note(props) {
   const { title, content } = props;
   return (
     <div className="note">
-      <span className="top">
+      <span className="title-and-options">
         <h5 className="note-tite">{title}</h5>
         <i class="fa-solid fa-ellipsis-vertical"></i>
       </span>

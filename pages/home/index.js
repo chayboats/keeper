@@ -48,15 +48,16 @@ export default function Home() {
     getImage();
   }, []);
 
-  function updateNoteTitle(e) {
-    setNoteTitle(e.target.value);
-  }
-  function updateNoteContent(e) {
-    setNoteContent(e.target.value);
+  function updateNoteTitle(event) {
+    setNoteTitle(event.target.value);
   }
 
-  function addNotes(e) {
-    e.preventDefault();
+  function updateNoteContent(event) {
+    setNoteContent(event.target.value);
+  }
+
+  function addNotes(event) {
+    event.preventDefault();
     setNotes((prevValue) => [
       ...prevValue,
       { title: noteTitle, content: noteContent },
