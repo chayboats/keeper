@@ -1,12 +1,17 @@
 import "./internals/styles/home.css";
 import Header from "./internals/components/Header";
 import NoteForm from "./internals/components/NoteForm";
+import Note from "./internals/components/Note";
+import DeleteAlert from "./internals/components/DeleteAlert";
 import { useState, useEffect } from "react";
 
 export default function Home() {
   const [hideDropdown, setHideDropdown] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [profileImage, setProfileImage] = useState(undefined);
+  const [noteTitle, setNoteTitle] = useState("");
+  const [noteContent, setNoteContent] = useState("");
+  const [notes, setNotes] = useState([]);
 
   async function getImage() {
     try {
@@ -43,6 +48,24 @@ export default function Home() {
     getImage();
   }, []);
 
+  function updateNoteTitle(event) {
+    setNoteTitle(event.target.value);
+  }
+
+  function updateNoteContent(event) {
+    setNoteContent(event.target.value);
+  }
+
+  function addNotes(event) {
+    event.preventDefault();
+    setNotes((prevValue) => [
+      ...prevValue,
+      { title: noteTitle, content: noteContent },
+    ]);
+    setNoteTitle("");
+    setNoteContent("");
+  }
+
   if (profileImage === undefined) {
     return <h1>Loading...</h1>;
   }
@@ -52,15 +75,33 @@ export default function Home() {
       <Header
         profileImgSrc={profileImage}
         clickProfileImage={toggleDropdownClass}
-        dropdownClass={hideDropdown ? "hide" : "show"}
+        dropdownClass={hideDropdown ? "hide" : "header-dropdown"}
         createNote={createNote}
       />
       <NoteForm
+        onSubmit={addNotes}
+        titleValue={noteTitle}
+        contentValue={noteContent}
+        titleChange={updateNoteTitle}
+        contentChange={updateNoteContent}
         clickTextArea={expandForm}
         inputTitleClass={showForm ? "input-text" : "hide"}
         buttonTitleClass={showForm ? "add-note" : "hide"}
         rows={showForm ? 3 : 1}
+        clickAdd={addNotes}
       />
+      <div>
+        <div className="notes">
+          {notes.map((note, index) => (
+            <Note key={index} title={note.title} content={note.content} />
+          ))}
+        </div>
+      </div>
+      <div className="hide">
+        <DeleteAlert />
+      </div>
     </div>
   );
 }
+
+//  home-alert

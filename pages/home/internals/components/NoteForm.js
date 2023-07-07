@@ -1,16 +1,37 @@
 export default function NoteForm(props) {
-  const { clickTextArea, inputTitleClass, buttonTitleClass, rows } = props;
+  const {
+    onSubmit,
+    clickAdd,
+    titleChange,
+    contentChange,
+    titleValue,
+    contentValue,
+    clickTextArea,
+    inputTitleClass,
+    buttonTitleClass,
+    rows,
+  } = props;
   return (
     <div className="form">
-      <form className="note-form">
-        <input className={inputTitleClass} placeholder="Title" />
+      <form onSubmit={onSubmit} className="note-form">
+        <input
+          onChange={titleChange}
+          value={titleValue}
+          className={inputTitleClass}
+          placeholder="Title"
+          maxLength={15}
+        />
         <textarea
+          onChange={contentChange}
+          value={contentValue}
           onClick={clickTextArea}
           rows={rows}
           className="input-text"
           placeholder="Take a note"
+          required={true}
+          maxLength={95}
         />
-        <button className={buttonTitleClass} type="submit">
+        <button className={buttonTitleClass} onClick={clickAdd} type="submit">
           Add
         </button>
       </form>
