@@ -21,12 +21,29 @@
   background-color: rgb(247, 247, 247);
 }
 
+.note-dropdown {
+  list-style: none;
+  box-shadow: 1px 1px 5px .5px rgba(161, 161, 161, 0.395);
+  width: 10rem;
+  padding-left: 0;
+  border-radius: 5px;
+  background-color: rgb(247, 247, 247);
+  position: absolute;
+}
+
+.dropdown-container {
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
 .hide {
   display: none;
 }
 
-#create-note, #logout {
+.menu-item {
   padding: 1rem 0 1rem 1rem;
+  margin: 0;
 }
 
 hr {
@@ -39,7 +56,7 @@ hr {
   color: black;
 }
 
-#create-note:hover, .logout:hover {
+.menu-item:hover {
   cursor: pointer;
   color: #0d6efd
 }
@@ -152,17 +169,17 @@ hr {
   color: rgb(242, 88, 88);
 }
 
-.note .top {
+.note .title-and-options {
   display: flex;
   align-items: top;
   justify-content: space-between;
 }
 
-.note .top i {
+.note .title-and-options i {
   padding-right: .5rem;
 }
 
-.note .top i:hover {
+.note .title-and-options i:hover {
   color:rgb(102, 102, 225)
 }
 
