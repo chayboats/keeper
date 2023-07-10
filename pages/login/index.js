@@ -22,7 +22,7 @@ export default function Login() {
   }, []);
 
   if (users.length == 0) {
-    return <h1>Loading</h1>;
+    return <h1 className="loading-screen">Loading...</h1>;
   }
 
   function updateEmail(e) {
