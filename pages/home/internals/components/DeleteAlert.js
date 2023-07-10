@@ -3,7 +3,7 @@ export default function DeleteAlert(props) {
 
   return (
     <div className={hideDeleteAlert}>
-      <div className="delete-alert">
+      <form className="delete-alert">
         <h4>Delete Note?</h4>
         <p>This note will be permenantly deleted.</p>
         <button
@@ -13,12 +13,13 @@ export default function DeleteAlert(props) {
           Cancel
         </button>
         <button
+          type="submit"
           onClick={deleteNote}
           className="delete-button"
         >
           Delete
         </button>
-      </div>
+      </form>
     </div>
   );
 }

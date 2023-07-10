@@ -28,10 +28,8 @@ export default function Home() {
         createNote={expandFormAndCloseDropdown}
       />
       <NoteSection
+        formIsDisplayed={showForm}
         clickTextArea={expandForm}
-        inputTitleClass={showForm ? 'input-text' : 'hide'}
-        buttonClass={showForm ? 'add-note' : 'hide'}
-        rows={showForm ? 3 : 1}
       />
     </div>
   );

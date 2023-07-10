@@ -15,7 +15,7 @@ export default function Note(props) {
           className="fa-solid fa-ellipsis-vertical"
         ></i>
       </span>
-      <div className={'dropdown-container'}>
+      <div className="dropdown-container">
         <div className={isSelected ? 'note-dropdown' : 'hide'}>
           <MenuItem
             itemText="Edit"
