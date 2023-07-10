@@ -1,7 +1,7 @@
 import MenuItem from '@/pages/home/internals/components/MenuItem';
 
 export default function Note(props) {
-  const { id, handleOptionsClick, clickEdit, clickDelete, title, content, isSelected } = props;
+  const { id, handleOptionsClick, clickEdit, handleDeleteClick, title, content, isSelected } = props;
 
   return (
     <div
@@ -24,7 +24,7 @@ export default function Note(props) {
           />
           <MenuItem
             itemText="Delete"
-            onItemClick={clickDelete}
+            onItemClick={handleDeleteClick}
             lineClass="none"
           />
         </div>

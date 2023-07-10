@@ -1,14 +1,17 @@
 export default function DeleteAlert(props) {
-  const { hideDeleteAlert, toggleDeleteAlertClass, deleteNote } = props;
+  const { deleteAlertClass, handleSubmit, handleCancelClick } = props;
 
   return (
-    <div className={hideDeleteAlert}>
-      <form onSubmit={deleteNote} className="delete-alert">
+    <div className={deleteAlertClass}>
+      <form
+        onSubmit={handleSubmit}
+        className="delete-alert"
+      >
         <h4>Delete Note?</h4>
         <p>This note will be permenantly deleted.</p>
         <button
           type="button"
-          onClick={toggleDeleteAlertClass}
+          onClick={handleCancelClick}
           className="cancel-button"
         >
           Cancel

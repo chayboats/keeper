@@ -31,10 +31,15 @@ export default function NoteSection(props) {
     setHideDeleteAlert(!hideDeleteAlert);
   }
 
-  function deleteNote(event) {
+  function closeDeleteAlertAndUnselectId() {
+    setSelectedNoteId(null);
+    toggleDeleteAlertClass();
+  }
+
+  function deleteNoteAndHideAlert(event) {
     event.preventDefault();
-    const noteElement = event.target.closest('.note').id;
-    console.log(noteElement);
+    setNotes((prevValue) => prevValue.filter((note) => note.id != selectedNoteId));
+    toggleDeleteAlertClass();
   }
 
   function setSelected(noteId) {
@@ -85,15 +90,16 @@ export default function NoteSection(props) {
               content={note.content}
               handleOptionsClick={setSelected}
               isSelected={selectedNoteId == note.id}
+              handleDeleteClick={toggleDeleteAlertClass}
             />
           ))}
         </div>
       </div>
 
       <DeleteAlert
-        hideDeleteAlert={hideDeleteAlert ? 'hide' : 'home-alert'}
-        toggleDeleteAlertClass={toggleDeleteAlertClass}
-        deleteNote={deleteNote}
+        deleteAlertClass={hideDeleteAlert ? 'hide' : 'home-alert'}
+        handleCancelClick={closeDeleteAlertAndUnselectId}
+        handleSubmit={deleteNoteAndHideAlert}
       />
     </div>
   );
