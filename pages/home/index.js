@@ -28,7 +28,7 @@ export default function Home() {
         createNote={expandFormAndCloseDropdown}
       />
       <NoteSection
-        formIsDisplayed={showForm}
+        isFormDisplayed={showForm}
         clickTextArea={expandForm}
       />
     </div>

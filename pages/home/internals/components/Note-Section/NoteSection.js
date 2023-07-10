@@ -5,7 +5,7 @@ import Note from './Note';
 import DeleteAlert from '../DeleteAlert';
 
 export default function NoteSection(props) {
-  const { clickTextArea, formIsDisplayed } = props;
+  const { clickTextArea, isFormDisplayed } = props;
   const [notes, setNotes] = useState([]);
   const [noteTitle, setNoteTitle] = useState('');
   const [noteContent, setNoteContent] = useState('');
@@ -32,6 +32,7 @@ export default function NoteSection(props) {
   }
 
   function deleteNote(event) {
+    event.preventDefault();
     const noteElement = event.target.closest('.note').id;
     console.log(noteElement);
   }
@@ -50,7 +51,7 @@ export default function NoteSection(props) {
           <input
             onChange={updateNoteTitle}
             value={noteTitle}
-            className={formIsDisplayed ? 'input-text' : 'hide'}
+            className={isFormDisplayed ? 'input-text' : 'hide'}
             placeholder="Title"
             maxLength={15}
           />
@@ -58,14 +59,14 @@ export default function NoteSection(props) {
             onChange={updateNoteContent}
             value={noteContent}
             onClick={clickTextArea}
-            rows={formIsDisplayed ? 3 : 1}
+            rows={isFormDisplayed ? 3 : 1}
             className="input-text"
             placeholder="Take a note"
             required={true}
             maxLength={95}
           />
           <button
-            className={formIsDisplayed ? 'add-note' : 'hide'}
+            className={isFormDisplayed ? 'add-note' : 'hide'}
             onClick={addNotes}
             type="submit"
           >
