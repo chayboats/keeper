@@ -33,7 +33,7 @@ export default function Header(props) {
   }
 
   if (profileImage === undefined) {
-    return <h1>Loading...</h1>;
+    return <h1 className="loading-screen">Loading...</h1>;
   }
 
   return (
