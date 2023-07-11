@@ -1,28 +1,33 @@
 import MenuItem from "@/pages/home/internals/components/Note-Section/MenuItem";
 
 export default function Note(props) {
-  const {
-    id,
-    handleOptionsClick,
-    clickEdit,
-    handleDeleteClick,
-    title,
-    content,
-    isSelected,
-  } = props;
+  const { note, handleOptionsClick, handleDeleteClick, isSelected } = props;
 
   return (
-    <div id={id} className="note">
+    <div id={note.id} className="note">
       <span className="title-and-options">
-        <h5 className="note-tite">{title}</h5>
+        <h5 className="note-tite">{note.title}</h5>
         <i
-          onClick={() => handleOptionsClick(id)}
+          onClick={() => handleOptionsClick(note.id)}
           className="fa-solid fa-ellipsis-vertical"
         ></i>
       </span>
       <div className="dropdown-container">
         <div className={isSelected ? "note-dropdown" : "hide"}>
-          <MenuItem itemText="Edit" onItemClick={clickEdit} lineClass="line" />
+          <div>
+            <p
+              type="button"
+              className="menu-item"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              data-bs-whatever="@mdo"
+            >
+              Edit
+            </p>
+            <span className="line">
+              <hr />
+            </span>
+          </div>
           <MenuItem
             itemText="Delete"
             onItemClick={handleDeleteClick}
@@ -30,7 +35,7 @@ export default function Note(props) {
           />
         </div>
       </div>
-      <p className="note-content">{content}</p>
+      <p className="note-content">{note.content}</p>
     </div>
   );
 }

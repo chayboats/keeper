@@ -1,7 +1,7 @@
 export default function MenuItem(props) {
-  const { id, itemText, onItemClick, lineClass } = props;
+  const { itemText, onItemClick, lineClass } = props;
   return (
-    <div id={id}>
+    <div>
       <p
         onClick={onItemClick}
         className="menu-item"
