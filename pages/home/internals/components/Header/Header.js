@@ -1,6 +1,6 @@
-import MenuItem from '../MenuItem';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import MenuItem from "../Note-Section/MenuItem";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Header(props) {
   const router = useRouter();
@@ -10,7 +10,9 @@ export default function Header(props) {
 
   async function getImage() {
     try {
-      const imageData = await fetch('https://api.slingacademy.com/v1/sample-data/photos');
+      const imageData = await fetch(
+        "https://api.slingacademy.com/v1/sample-data/photos"
+      );
       const jsonImageData = await imageData.json();
       const jsonPhotos = jsonImageData.photos;
       const randomPhoto = randomElementFromArray(jsonPhotos);
@@ -29,7 +31,7 @@ export default function Header(props) {
   }
 
   function logout() {
-    router.push('/');
+    router.push("/");
   }
 
   if (profileImage === undefined) {
