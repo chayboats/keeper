@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import Note from './Note';
-import DeleteAlert from '../DeleteAlert';
+import DeleteAlert from './DeleteAlert';
 
 export default function NoteSection(props) {
   const { clickTextArea, isFormDisplayed } = props;
