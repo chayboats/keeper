@@ -72,7 +72,7 @@ export default function NoteSection(props) {
             rows={isFormDisplayed ? 3 : 1}
             className="input-text"
             placeholder="Take a note"
-            required={true}
+            required
             maxLength={95}
           />
           <button
