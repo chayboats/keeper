@@ -1,15 +1,15 @@
 // Fix deleteNote function
-import { v4 as uuidv4 } from "uuid";
-import { useState, useMemo } from "react";
-import Note from "./Note";
-import DeleteAlert from "./DeleteAlert";
-import EditModal from "./EditModal";
+import { v4 as uuidv4 } from 'uuid';
+import { useState, useMemo } from 'react';
+import Note from './Note';
+import DeleteAlert from './DeleteAlert';
+import EditModal from './EditModal';
 
 export default function NoteSection(props) {
   const { clickTextArea, isFormDisplayed } = props;
   const [notes, setNotes] = useState([]);
-  const [noteTitle, setNoteTitle] = useState("");
-  const [noteContent, setNoteContent] = useState("");
+  const [noteTitle, setNoteTitle] = useState('');
+  const [noteContent, setNoteContent] = useState('');
   const [hideDeleteAlert, setHideDeleteAlert] = useState(true);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
 
@@ -19,12 +19,9 @@ export default function NoteSection(props) {
 
   function addNotes(event) {
     event.preventDefault();
-    setNotes((prevValue) => [
-      ...prevValue,
-      { id: uuidv4(), title: noteTitle, content: noteContent },
-    ]);
-    setNoteTitle("");
-    setNoteContent("");
+    setNotes((prevValue) => [...prevValue, { id: uuidv4(), title: noteTitle ? noteTitle : 'Untitled', content: noteContent }]);
+    setNoteTitle('');
+    setNoteContent('');
   }
 
   function updateNoteTitle(event) {
@@ -46,9 +43,7 @@ export default function NoteSection(props) {
 
   function deleteNoteAndHideAlert(event) {
     event.preventDefault();
-    setNotes((prevValue) =>
-      prevValue.filter((note) => note.id != selectedNoteId)
-    );
+    setNotes((prevValue) => prevValue.filter((note) => note.id != selectedNoteId));
     toggleDeleteAlertClass();
   }
 
@@ -59,11 +54,14 @@ export default function NoteSection(props) {
   return (
     <div>
       <div className="form">
-        <form onSubmit={addNotes} className="note-form">
+        <form
+          onSubmit={addNotes}
+          className="note-form"
+        >
           <input
             onChange={updateNoteTitle}
             value={noteTitle}
-            className={isFormDisplayed ? "input-text" : "hide"}
+            className={isFormDisplayed ? 'input-text' : 'hide'}
             placeholder="Title"
             maxLength={15}
           />
@@ -78,8 +76,7 @@ export default function NoteSection(props) {
             maxLength={95}
           />
           <button
-            className={isFormDisplayed ? "add-note" : "hide"}
-            onClick={addNotes}
+            className={isFormDisplayed ? 'add-note' : 'hide'}
             type="submit"
           >
             Add
@@ -106,7 +103,7 @@ export default function NoteSection(props) {
       {selectedNote != null && <EditModal selectedNote={selectedNote} />}
 
       <DeleteAlert
-        deleteAlertClass={hideDeleteAlert ? "hide" : "home-alert"}
+        deleteAlertClass={hideDeleteAlert ? 'hide' : 'home-alert'}
         handleCancelClick={closeDeleteAlertAndUnselectId}
         handleSubmit={deleteNoteAndHideAlert}
       />
