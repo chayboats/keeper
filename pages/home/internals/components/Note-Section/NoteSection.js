@@ -51,6 +51,18 @@ export default function NoteSection(props) {
     setSelectedNoteId(noteId == selectedNoteId ? null : noteId);
   }
 
+  function handleEditSubmit(title, content) {
+    setNotes((prevValue) => prevValue.map((note) => editSelectedNote(note, title, content)));
+    setSelected(selectedNoteId);
+  }
+
+  function editSelectedNote(note, editedTitle, editedContent) {
+    const title = editedTitle ? editedTitle : 'Untitled';
+    const updatedNote = { id: selectedNoteId, title, content: editedContent };
+
+    return note.id == selectedNoteId ? updatedNote : note;
+  }
+
   return (
     <div>
       <div className="form">
@@ -100,7 +112,13 @@ export default function NoteSection(props) {
           ))}
         </div>
       </div>
-      {selectedNote != null && <EditModal selectedNote={selectedNote} />}
+      {selectedNote != null && (
+        <EditModal
+          onSubmit={handleEditSubmit}
+          selectedNote={selectedNote}
+          handleClose={() => setSelectedNoteId(null)}
+        />
+      )}
 
       <DeleteAlert
         deleteAlertClass={hideDeleteAlert ? 'hide' : 'home-alert'}
