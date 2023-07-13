@@ -37,7 +37,7 @@ export default function EditModal(props) {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              onClick={() => handleClose(selectedNote.id)}
+              onClick={handleClose}
             />
           </div>
           <div className="modal-body">
