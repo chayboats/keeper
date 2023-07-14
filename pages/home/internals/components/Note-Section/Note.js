@@ -1,10 +1,13 @@
-import MenuItem from "@/pages/home/internals/components/Note-Section/MenuItem";
+import MenuItem from '@/pages/home/internals/components/Note-Section/MenuItem';
 
 export default function Note(props) {
   const { note, handleOptionsClick, handleDeleteClick, isSelected } = props;
 
   return (
-    <div id={note.id} className="note">
+    <div
+      id={note.id}
+      className="note"
+    >
       <span className="title-and-options">
         <h5 className="note-tite">{note.title}</h5>
         <i
@@ -13,7 +16,7 @@ export default function Note(props) {
         ></i>
       </span>
       <div className="dropdown-container">
-        <div className={isSelected ? "note-dropdown" : "hide"}>
+        <div className={isSelected ? 'note-dropdown' : 'hide'}>
           <div>
             <p
               type="button"
