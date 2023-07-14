@@ -1,6 +1,6 @@
 // Fix deleteNote function
 import { v4 as uuidv4 } from 'uuid';
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Note from './Note';
 import EditModal from './EditModal';
 import DeleteAlert from './DeleteAlert';
@@ -13,6 +13,15 @@ export default function NoteSection(props) {
   const [selectedNoteId, setSelectedNoteId] = useState(null);
   const [hideDeleteAlert, setHideDeleteAlert] = useState(true);
   const [deleteAll, setDeleteAll] = useState(null);
+
+  useEffect(() => {
+    const localNotes = JSON.parse(localStorage.getItem('localNotes'));
+    localNotes && setNotes(localNotes);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('localNotes', JSON.stringify(notes));
+  }, [notes]);
 
   const selectedNote = useMemo(() => {
     return notes.find((note) => note.id == selectedNoteId);
