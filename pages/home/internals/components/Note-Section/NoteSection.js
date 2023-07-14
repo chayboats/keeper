@@ -2,27 +2,21 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useState, useMemo } from 'react';
 import Note from './Note';
-import DeleteAlert from './DeleteAlert';
 import EditModal from './EditModal';
+import DeleteAlert from './DeleteAlert';
 
 export default function NoteSection(props) {
   const { clickTextArea, isFormDisplayed } = props;
   const [notes, setNotes] = useState([]);
   const [noteTitle, setNoteTitle] = useState('');
   const [noteContent, setNoteContent] = useState('');
-  const [hideDeleteAlert, setHideDeleteAlert] = useState(true);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
+  const [hideDeleteAlert, setHideDeleteAlert] = useState(true);
+  const [deleteAll, setDeleteAll] = useState(null);
 
   const selectedNote = useMemo(() => {
     return notes.find((note) => note.id == selectedNoteId);
   }, [notes, selectedNoteId]);
-
-  function addNotes(event) {
-    event.preventDefault();
-    setNotes((prevValue) => [...prevValue, { id: uuidv4(), title: noteTitle ? noteTitle : 'Untitled', content: noteContent }]);
-    setNoteTitle('');
-    setNoteContent('');
-  }
 
   function updateNoteTitle(event) {
     setNoteTitle(event.target.value);
@@ -31,20 +25,11 @@ export default function NoteSection(props) {
   function updateNoteContent(event) {
     setNoteContent(event.target.value);
   }
-
-  function toggleDeleteAlertClass() {
-    setHideDeleteAlert(!hideDeleteAlert);
-  }
-
-  function closeDeleteAlertAndUnselectId() {
-    setSelectedNoteId(null);
-    toggleDeleteAlertClass();
-  }
-
-  function deleteNoteAndHideAlert(event) {
+  function addNotes(event) {
     event.preventDefault();
-    setNotes((prevValue) => prevValue.filter((note) => note.id != selectedNoteId));
-    toggleDeleteAlertClass();
+    setNotes((prevValue) => [...prevValue, { id: uuidv4(), title: noteTitle ? noteTitle : 'Untitled', content: noteContent }]);
+    setNoteTitle('');
+    setNoteContent('');
   }
 
   function setSelected(noteId) {
@@ -63,8 +48,43 @@ export default function NoteSection(props) {
     return note.id == selectedNoteId ? updatedNote : note;
   }
 
+  function displayDeleteAlert(isDeletingAll) {
+    setDeleteAll(isDeletingAll);
+    toggleDeleteAlertVisibility();
+  }
+
+  function toggleDeleteAlertVisibility() {
+    notes.length > 0 && setHideDeleteAlert(!hideDeleteAlert);
+  }
+
+  function closeDeleteAlertAndUnselectId() {
+    setSelectedNoteId(null);
+    toggleDeleteAlertVisibility();
+  }
+
+  function deleteNoteAndHideAlert(event) {
+    event.preventDefault();
+    setNotes(deleteAll ? [] : (prevValue) => prevValue.filter((note) => note.id != selectedNoteId));
+    toggleDeleteAlertVisibility();
+  }
+
   return (
     <div>
+      <div className="delete-all-container">
+        <button
+          className={notes.length == 0 ? 'delete-all-inactive' : 'delete-all'}
+          onClick={() => displayDeleteAlert(true)}
+        >
+          Delete All
+        </button>
+      </div>
+      <DeleteAlert
+        hideDeleteAlert={hideDeleteAlert}
+        handleCancelClick={closeDeleteAlertAndUnselectId}
+        handleSubmit={deleteNoteAndHideAlert}
+        deleteAll={deleteAll}
+      />
+
       <div className="form">
         <form
           onSubmit={addNotes}
@@ -100,13 +120,10 @@ export default function NoteSection(props) {
         <div className="notes">
           {notes.map((note) => (
             <Note
-              id={note.id}
               key={note.id}
-              title={note.title}
-              content={note.content}
               handleOptionsClick={setSelected}
               isSelected={selectedNoteId == note.id}
-              handleDeleteClick={toggleDeleteAlertClass}
+              handleDeleteClick={() => displayDeleteAlert(false)}
               note={note}
             />
           ))}
@@ -119,12 +136,6 @@ export default function NoteSection(props) {
           handleClose={() => setSelectedNoteId(null)}
         />
       )}
-
-      <DeleteAlert
-        deleteAlertClass={hideDeleteAlert ? 'hide' : 'home-alert'}
-        handleCancelClick={closeDeleteAlertAndUnselectId}
-        handleSubmit={deleteNoteAndHideAlert}
-      />
     </div>
   );
 }

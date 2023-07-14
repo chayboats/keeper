@@ -1,14 +1,16 @@
 export default function DeleteAlert(props) {
-  const { deleteAlertClass, handleSubmit, handleCancelClick } = props;
+  const { hideDeleteAlert, handleSubmit, handleCancelClick, deleteAll } = props;
 
   return (
-    <div className={deleteAlertClass}>
+    <div className={hideDeleteAlert ? 'hide' : 'delete-alert-container'}>
       <form
         onSubmit={handleSubmit}
         className="delete-alert"
       >
-        <h4>Delete Note?</h4>
-        <p>This note will be permenantly deleted.</p>
+        <h4>Delete {deleteAll ? 'notes' : 'note'}?</h4>
+        <p>
+          {deleteAll ? 'All' : 'This'} {deleteAll ? 'notes' : 'note'} will be permenantly deleted.
+        </p>
         <button
           type="button"
           onClick={handleCancelClick}
@@ -26,5 +28,3 @@ export default function DeleteAlert(props) {
     </div>
   );
 }
-
-//hideDeleteAlert ? "hide" : "delete-alert"
