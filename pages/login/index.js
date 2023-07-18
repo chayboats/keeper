@@ -1,6 +1,7 @@
 import './internals/styles/login.css';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function Login() {
   const router = useRouter();
@@ -14,16 +15,25 @@ export default function Login() {
   async function getUsers() {
     const data = await fetch('https://dummyjson.com/users');
     const jsonData = await data.json();
-    setUsers(jsonData.users);
+    return jsonData.users;
   }
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    const mockUsersValue = localStorage.getItem('mockUsers');
 
-  if (users.length == 0) {
-    return <h1 className="loading-screen">Loading...</h1>;
-  }
+    if (mockUsersValue == null) {
+      async function fetchUsers() {
+        const fetchedUsers = await getUsers();
+        setUsers(fetchedUsers);
+        localStorage.setItem('mockUsers', JSON.stringify(fetchedUsers));
+      }
+
+      fetchUsers();
+    } else {
+      const mockUsers = JSON.parse(mockUsersValue);
+      setUsers(mockUsers);
+    }
+  }, []);
 
   function updateEmail(e) {
     setEmail(e.target.value);
@@ -45,6 +55,10 @@ export default function Login() {
     }
 
     router.push('/home');
+  }
+
+  if (users.length == 0) {
+    return <h1 className="loading-screen">Loading...</h1>;
   }
 
   return (
@@ -113,12 +127,12 @@ export default function Login() {
             Sign in
           </button>
 
-          <a
+          <Link
             className="center"
-            href=""
+            href="/create-account"
           >
             Create an account
-          </a>
+          </Link>
 
           <p className="center text-dark">©{new Date().getFullYear()}</p>
         </form>

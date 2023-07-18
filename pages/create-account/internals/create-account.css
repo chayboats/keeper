@@ -1,0 +1,103 @@
+.create-account-page {
+  display: flex;
+	height: 100vh;
+}
+
+.create-account-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  padding: 4rem;
+}
+
+.create-account-container form {
+  min-width: 375px;
+  background-color: white;
+  border-radius: 3px;
+  margin-top: 2rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 2rem;
+}
+
+p {
+  margin: 0;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  padding: .6rem;;
+}
+
+.hide {
+  display: none;
+}
+
+.email-alert {
+  height: 1rem;
+}
+
+.password-alert {
+  height: 5rem;
+  width: 100%;
+}
+
+.button  {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.fa-google {
+  margin-right: 5px;
+}
+
+.log-in {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 5px;
+}
+
+.log-in-link {
+  color: #212529;
+  font-weight: 600;
+}
+
+.log-in-link:hover {
+  color: rgba(12, 110, 253);
+}
+
+.hero-section {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+  width: 100%;
+  margin: 1rem;
+  border-radius: 4rem .25rem 4rem .25rem;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
