@@ -2,7 +2,7 @@ import './internals/create-account.css';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Logo from './internals/components/Logo';
-import LogIn from './internals/components/LogIn';
+import LoginSection from './internals/components/LoginSection';
 import SignUpButtons from './internals/components/SignUpButtons';
 import InvalidAlert from './internals/components/InvalidAlert';
 
@@ -15,7 +15,7 @@ export default function CreateAccount() {
   const [users, setUsers] = useState([]);
 
   const router = useRouter();
-  
+
   useEffect(() => {
     const mockUsers = JSON.parse(localStorage.getItem('mockUsers'));
     mockUsers && setUsers(mockUsers);
@@ -28,25 +28,25 @@ export default function CreateAccount() {
   function authenticate(event) {
     event.preventDefault();
 
-    if (emailCheck()) {
+    if (isEmailExisting()) {
       setHideEmailAlert(false);
       return;
     }
-    passwordCheck() ? updateUsers() : setHidePasswordAlert(false);
+    isPasswordValid() ? handleCreateAccount() : setHidePasswordAlert(false);
   }
 
-  function emailCheck() {
-    const findEmail = users.find((user) => user.email == email);
-    return Boolean(findEmail);
+  function isEmailExisting() {
+    const emailFound = users.find((user) => user.email == email);
+    return Boolean(emailFound);
   }
 
-  function passwordCheck() {
+  function isPasswordValid() {
     const pattern = /^[a-zA-Z0-9]+$/;
     const match = password.match(pattern);
     return Boolean(match);
   }
 
-  function updateUsers() {
+  function handleCreateAccount() {
     setUsers((prevValue) => [...prevValue, { name: name, email: email, password: password }]);
     router.push('/home');
   }
@@ -108,7 +108,7 @@ export default function CreateAccount() {
             message="* Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji."
           />
           <SignUpButtons />
-          <LogIn />
+          <LoginSection />
         </form>
       </div>
       <div className="hero-section"></div>

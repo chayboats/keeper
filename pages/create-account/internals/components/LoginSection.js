@@ -1,6 +1,6 @@
 import Link
  from "next/link";
-export default function LogIn() {
+export default function LoginSection() {
   return (
     <div className="log-in">
       <p>Already have an account?</p>
