@@ -31,6 +31,7 @@ export default function Header(props) {
   }
 
   function logout() {
+    localStorage.removeItem('user')
     router.push("/");
   }
 

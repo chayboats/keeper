@@ -53,8 +53,8 @@ export default function Login() {
       setSignInError(true);
       return;
     }
-
     router.push('/home');
+    localStorage.setItem('user', JSON.stringify(email))
   }
 
   if (users.length == 0) {

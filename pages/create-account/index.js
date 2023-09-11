@@ -23,6 +23,7 @@ export default function CreateAccount() {
 
   useEffect(() => {
     localStorage.setItem('mockUsers', JSON.stringify(users));
+    localStorage.setItem('user', JSON.stringify(email));
   }, [users]);
 
   function authenticate(event) {
@@ -47,7 +48,7 @@ export default function CreateAccount() {
   }
 
   function handleCreateAccount() {
-    setUsers((prevValue) => [...prevValue, { name: name, email: email, password: password }]);
+    setUsers((prevValue) => [...prevValue, { id: prevValue.length + 1, name: name, email: email, password: password }]);
     router.push('/home');
   }
 

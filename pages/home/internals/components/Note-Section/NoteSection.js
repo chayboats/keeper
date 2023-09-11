@@ -13,14 +13,20 @@ export default function NoteSection(props) {
   const [selectedNoteId, setSelectedNoteId] = useState(null);
   const [hideDeleteAlert, setHideDeleteAlert] = useState(true);
   const [deleteAll, setDeleteAll] = useState(null);
+  const [userId, setUserId] = useState(undefined);
 
   useEffect(() => {
-    const localNotes = JSON.parse(localStorage.getItem('localNotes'));
+    const email = JSON.parse(localStorage.getItem('user'));
+    const users = JSON.parse(localStorage.getItem('mockUsers'));
+    const user = users.find((person) => person.email == email);
+    const localNotes = JSON.parse(localStorage.getItem(`localNotes-${user.id}`));
+    
     localNotes && setNotes(localNotes);
+    setUserId(user.id);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('localNotes', JSON.stringify(notes));
+    userId && localStorage.setItem(`localNotes-${userId}`, JSON.stringify(notes));
   }, [notes]);
 
   const selectedNote = useMemo(() => {
@@ -34,13 +40,13 @@ export default function NoteSection(props) {
   function updateNoteContent(event) {
     setNoteContent(event.target.value);
   }
+
   function addNotes(event) {
     event.preventDefault();
     setNotes((prevValue) => [...prevValue, { id: uuidv4(), title: noteTitle ? noteTitle : 'Untitled', content: noteContent }]);
     setNoteTitle('');
     setNoteContent('');
   }
-
   function setSelected(noteId) {
     setSelectedNoteId(noteId == selectedNoteId ? null : noteId);
   }
