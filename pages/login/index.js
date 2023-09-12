@@ -7,8 +7,8 @@ export default function Login() {
   const router = useRouter();
 
   const [users, setUsers] = useState([]);
-  const [email, setEmail] = useState('atuny0@sohu.com');
-  const [password, setPassword] = useState('9uQFF1Lh');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [signInError, setSignInError] = useState(false);
 
