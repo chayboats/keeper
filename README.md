@@ -1,6 +1,6 @@
 # Keeper - Note Taking App
 
-![Keeper Gif](keeper.gif)
+https://github.com/chayboats/keeper/assets/107378002/8bff3779-432a-46f2-9616-3208d292faa5
 
 Keeper is a simple and intuitive note-taking app built with Next.js. It allows users to create, edit, delete, and manage their notes conveniently. Whether you need to jot down important information, ideas, or to-do lists, Keeper has got you covered
 ## Features
