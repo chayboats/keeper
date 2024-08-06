@@ -1,9 +1,10 @@
 import { useState } from 'react';
+
 export default function EditModal(props) {
   const { handleClose, onSubmit, selectedNote } = props;
 
-  const [title, setTitle] = useState(selectedNote.title);
-  const [content, setContent] = useState(selectedNote.content);
+  const [title, setTitle] = useState(selectedNote?.title);
+  const [content, setContent] = useState(selectedNote?.content);
 
   function updateTitle(event) {
     setTitle(event.target.value);
@@ -58,6 +59,7 @@ export default function EditModal(props) {
                   onChange={updateTitle}
                   value={title}
                   type="text"
+                  name="new-title"
                   className="form-control"
                   id="note-title"
                 />

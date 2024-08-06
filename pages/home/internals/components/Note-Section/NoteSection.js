@@ -20,7 +20,7 @@ export default function NoteSection(props) {
     const users = JSON.parse(localStorage.getItem('mockUsers'));
     const user = users.find((person) => person.email == email);
     const localNotes = JSON.parse(localStorage.getItem(`localNotes-${user.id}`));
-    
+
     localNotes && setNotes(localNotes);
     setUserId(user.id);
   }, []);
@@ -107,12 +107,14 @@ export default function NoteSection(props) {
         >
           <input
             onChange={updateNoteTitle}
+            name="title"
             value={noteTitle}
             className={isFormDisplayed ? 'input-text' : 'hide'}
             placeholder="Title"
             maxLength={15}
           />
           <textarea
+            id="add-note-content"
             onChange={updateNoteContent}
             value={noteContent}
             onClick={clickTextArea}

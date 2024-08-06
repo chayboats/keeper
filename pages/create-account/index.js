@@ -63,6 +63,7 @@ export default function CreateAccount() {
             <div className="form-group">
               <input
                 type="text"
+                name="name"
                 className="form-control"
                 placeholder="Name"
                 required
@@ -75,6 +76,7 @@ export default function CreateAccount() {
           <div className="form-group">
             <input
               type="email"
+              name="email"
               className="form-control"
               placeholder="Email"
               aria-describedby="emailHelpBlock"
@@ -92,6 +94,7 @@ export default function CreateAccount() {
           <div className="form-group">
             <input
               type="password"
+              name="password"
               className="form-control"
               placeholder="Password"
               aria-describedby="passwordHelpBlock"

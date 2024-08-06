@@ -1,4 +1,4 @@
-import { linkAttributes } from '@/pages/start/internals/data/navLinkInfo';
+import linkAttributes from '@/data/navLinkInfo';
 
 export default function Navbar(props) {
   const { className } = props;

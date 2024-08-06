@@ -1,17 +1,17 @@
-import MenuItem from '@/pages/home/internals/components/Note-Section/MenuItem';
+import MenuItem from './MenuItem';
 
 export default function Note(props) {
   const { note, handleOptionsClick, handleDeleteClick, isSelected } = props;
 
   return (
     <div
-      id={note.id}
+      id={note?.id}
       className="note"
     >
       <span className="title-and-options">
-        <h5 className="note-tite">{note.title}</h5>
+        <h5 className="note-tite">{note?.title}</h5>
         <i
-          onClick={() => handleOptionsClick(note.id)}
+          onClick={() => handleOptionsClick(note?.id)}
           className="fa-solid fa-ellipsis-vertical"
         ></i>
       </span>
@@ -38,7 +38,7 @@ export default function Note(props) {
           />
         </div>
       </div>
-      <p className="note-content">{note.content}</p>
+      <p className="note-content">{note?.content}</p>
     </div>
   );
 }

@@ -54,7 +54,7 @@ export default function Login() {
       return;
     }
     router.push('/home');
-    localStorage.setItem('user', JSON.stringify(email))
+    localStorage.setItem('user', JSON.stringify(email));
   }
 
   if (users.length == 0) {
@@ -70,18 +70,11 @@ export default function Login() {
         >
           <i className="fa-solid fa-list-check"></i>
           <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-          {signInError && (
-            <div
-              className="alert alert-danger"
-              role="alert"
-            >
-              Incorrect email or password
-            </div>
-          )}
 
           <div className="form-floating">
             <input
               type="email"
+              name="login-email"
               className="form-control login-input"
               id="email"
               placeholder="name@example.com"
@@ -94,6 +87,7 @@ export default function Login() {
 
           <div className="form-floating">
             <input
+              name="login-password"
               type="password"
               className="form-control login-input"
               id="password"
@@ -110,6 +104,7 @@ export default function Login() {
               type="form-check text-start my-3"
               className="form-check-input"
               id="checkbox"
+              name="form-check"
             />
             <label
               htmlFor="checkbox"
@@ -127,6 +122,15 @@ export default function Login() {
             Sign in
           </button>
 
+          {signInError && (
+            <div
+              style={{ marginTop: '1rem' }}
+              className="alert alert-danger"
+              role="alert"
+            >
+              Incorrect email or password
+            </div>
+          )}
           <Link
             className="center"
             href="/create-account"
